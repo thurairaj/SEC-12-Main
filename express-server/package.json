@@ -1,0 +1,27 @@
+{
+  "name": "express-server",
+  "version": "1.0.0",
+  "description": "A test backend server",
+  "homepage": "https://github.com/thurairaj/SEC-12-Main#readme",
+  "bugs": {
+    "url": "https://github.com/thurairaj/SEC-12-Main/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thurairaj/SEC-12-Main.git"
+  },
+  "license": "ISC",
+  "author": "Thurairaj L",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
