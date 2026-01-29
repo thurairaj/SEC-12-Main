@@ -2,9 +2,15 @@ const userService = require("../services/user.service");
 
 const createUser = asyncHandler(async (req, res) => {
 	const user = await  userService.createUser(req.body);
-	res.status(201).json({data: user});
+	res.json({data: user});
+})
+
+const getUserById = asyncHandler(async (req, res) => {
+	const user = await userService.getUserById(req.params.id);
+	res.json({data: user});
 })
 
 module.exports = {
-	createUser
+	createUser,
+	getUserById
 }

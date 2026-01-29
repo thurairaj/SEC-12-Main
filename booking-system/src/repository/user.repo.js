@@ -25,7 +25,12 @@ async function findByEmail(email) {
 	return users.find((user) => user.email === email);
 }
 
+async function findById(id) {
+	return users.find((user) => user.id === id);
+}
+
 module.exports = {
 	findByEmail,
+	findById,
 	create
 }

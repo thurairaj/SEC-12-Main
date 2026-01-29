@@ -1,0 +1,18 @@
+function validate(schema) {
+	return (req, res, next) => {
+		const payload = {
+			body: req.body,
+			params: req.params,
+			query: req.query,
+		}
+
+		try {
+			schema.parse(payload);
+		} catch (error) {
+			error.statusCode = 400;
+			error.isZodError = true;
+			next(error);
+		}
+
+	}
+}

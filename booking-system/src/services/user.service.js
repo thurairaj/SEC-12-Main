@@ -17,6 +17,15 @@ async function createUser(userCreateRequest) {
 	});
 }
 
+async function updateUser(userUpdateRequest) {}
+
+async function getUserById(id) {
+	const user = await userRepo.findById(id);
+	if(!user) throw makeHttpError(400, `User with id ${id} not found`);
+	return user;
+}
+
 module.exports = {
 	createUser,
+	getUserById
 }
