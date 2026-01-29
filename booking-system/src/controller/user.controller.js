@@ -1,4 +1,5 @@
 const userService = require("../services/user.service");
+const { asyncHandler } = require("../utils/asyncHandler");
 
 const createUser = asyncHandler(async (req, res) => {
 	const user = await  userService.createUser(req.body);

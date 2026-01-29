@@ -13,6 +13,7 @@ function validate(schema) {
 			error.isZodError = true;
 			next(error);
 		}
-
 	}
 }
+
+module.exports = {validate};
