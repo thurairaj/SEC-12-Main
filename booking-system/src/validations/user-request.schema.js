@@ -14,7 +14,23 @@ const getUserByIdSchema = z.object({
 	})
 })
 
+
+const listUserSchema = z.object({
+	query : z.object({
+		page: z.string()
+			.optional()
+			.transform(value => value ? Number(value) : 1 )
+			.refine(transformedValue => Number.isInteger(transformedValue) && transformedValue > 0, "page must be >= 1"),
+		limit: z.string()
+			.optional()
+			.transform(value => value ? Number(value) : 1 )
+			.refine(transformedValue => Number.isInteger(transformedValue) && transformedValue > 0, "page must be >= 1"),
+		q: z.string().optional()
+	})
+})
+
 module.exports = {
 	createUserRequestSchema,
-	getUserByIdSchema
+	getUserByIdSchema,
+	listUserSchema
 }

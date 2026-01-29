@@ -8,6 +8,7 @@ function validate(schema) {
 
 		try {
 			schema.parse(payload);
+			next();
 		} catch (error) {
 			error.statusCode = 400;
 			error.isZodError = true;

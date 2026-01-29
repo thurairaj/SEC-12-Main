@@ -11,7 +11,14 @@ const getUserById = asyncHandler(async (req, res) => {
 	res.json({data: user});
 })
 
+const listUsers = asyncHandler(async (req, res) => {
+	// /api/users?key1=value1,key2=value2
+	const result = await userService.listUsers(req.query)
+	res.json({data: result.items, pages: result.meta});
+})
+
 module.exports = {
 	createUser,
-	getUserById
+	getUserById,
+	listUsers,
 }

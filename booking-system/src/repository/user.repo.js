@@ -29,8 +29,13 @@ async function findById(id) {
 	return users.find((user) => user.id === id);
 }
 
+async function findAll() {
+	return users
+}
+
 module.exports = {
 	findByEmail,
 	findById,
+	findAll,
 	create
 }
