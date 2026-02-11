@@ -17,3 +17,5 @@ Order.belongsTo(User)
  */
 Order.belongsToMany(Product, {through: OrderItem})
 Product.belongsToMany(Order, {through: OrderItem})
+
+module.exports = {User, Order, OrderItem, Product};

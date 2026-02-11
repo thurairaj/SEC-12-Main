@@ -6,6 +6,6 @@ const OrderItem = sequalize.define("order_items", {
 		type: DataTypes.INTEGER,
 		defaultValue: 0
 	}
-})
+}, { underscored: true, updatedAt: false, createdAt: false })
 
 module.exports = OrderItem;

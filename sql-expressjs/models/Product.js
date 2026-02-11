@@ -9,6 +9,6 @@ const Product = sequalize.define("products", {
 	price: {
 		type: DataTypes.DECIMAL(10, 2),
 	}
-})
+}, { underscored: true, updatedAt: false })
 
 module.exports = Product;

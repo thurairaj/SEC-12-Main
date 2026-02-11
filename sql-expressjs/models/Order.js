@@ -6,11 +6,15 @@ const Order = sequalize.define("orders", {
 		type: DataTypes.DECIMAL(10, 2),
 		allowNull: false,
 	},
+	country: {
+		type: DataTypes.STRING,
+		allowNull: true,
+	},
 	status: {
 		type: DataTypes.TEXT,
 		allowNull: false,
 		defaultValue: 'pending'
 	}
-})
+}, { underscored: true, updatedAt: false })
 
 module.exports = Order;
