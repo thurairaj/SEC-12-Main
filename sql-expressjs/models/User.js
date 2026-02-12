@@ -1,7 +1,7 @@
 const sequalize = require('../db')
 const {DataTypes} = require("sequelize");
 
-const User = sequalize.define("users", {
+const User = sequalize.define("User", {
 	name: {
 		type: DataTypes.TEXT,
 		allowNull: false,
@@ -16,6 +16,6 @@ const User = sequalize.define("users", {
 		allowNull: true,
 		defaultValue: DataTypes.NOW,
 	}
-}, { underscored: true, updatedAt: false })
+}, { underscored: true, updatedAt: false, tableName: 'users' })
 
 module.exports = User;

@@ -7,8 +7,8 @@ const OrderItem = require('./OrderItem');
  * ONE-to-MANY
  * user -> orders
  */
-User.hasMany(Order)
 Order.belongsTo(User)
+User.hasMany(Order)
 
 
 /**
