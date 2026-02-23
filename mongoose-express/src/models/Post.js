@@ -7,3 +7,9 @@ const postScheme = new mongoose.Schema({
 	tags: {type: [String], default: []},
 	author: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
 }, {timestamps: true});
+
+postScheme.index({ author: 1 });
+postScheme.index({published: 1, createdAt: 1});
+postScheme.index({title: "text", content: "text"});
+
+module.exports = mongoose.model("Post", postScheme);
