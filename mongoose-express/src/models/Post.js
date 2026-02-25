@@ -13,3 +13,4 @@ postScheme.index({published: 1, createdAt: 1});
 postScheme.index({title: "text", content: "text"});
 
 module.exports = mongoose.model("Post", postScheme);
+
