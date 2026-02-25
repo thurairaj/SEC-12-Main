@@ -31,7 +31,6 @@ router.get('/', async (req, res) => {
 	} catch (e) {
 		console.log(e, "error in reading users")
 	}
-
 })
 
 

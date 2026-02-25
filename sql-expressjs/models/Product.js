@@ -1,7 +1,7 @@
 const sequalize = require('../db')
 const {DataTypes} = require("sequelize");
 
-const Product = sequalize.define("product", {
+const Product = sequalize.define("Product", {
 	name: {
 		type: DataTypes.TEXT,
 		allowNull: false,
@@ -9,6 +9,6 @@ const Product = sequalize.define("product", {
 	price: {
 		type: DataTypes.DECIMAL(10, 2),
 	}
-}, {  updatedAt: false, tableName: 'products' })
+}, {  updatedAt: false, tableName: 'products', createdAt: false })
 
 module.exports = Product;
