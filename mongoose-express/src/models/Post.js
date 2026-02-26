@@ -12,9 +12,8 @@ postScheme.index({ author: 1 });
 postScheme.index({published: 1, createdAt: 1});
 postScheme.index({title: "text", content: "text"});
 
-postScheme.pre('find', function(next) {
+postScheme.pre('find', function() {
 	this.populate("author", "name email status")
-	next();
 })
 
 module.exports = mongoose.model("Post", postScheme);

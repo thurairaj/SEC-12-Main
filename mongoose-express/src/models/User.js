@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
 	status: {type: String, enum: ["active", "inactive"], default: "active"},
 }, { timestamps: true });
 
-userSchema.index({email: 1});
 userSchema.index({status: 1, createdAt: -1});
 userSchema.index({status: 1, age: -1});
 userSchema.index({name: "text", email: "text"})

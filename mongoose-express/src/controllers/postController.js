@@ -25,7 +25,6 @@ async function getPosts(req, res,  next) {
 	const sort = req.query.sort ? req.query.sort : "-createdAt";
 
 	const users = await Post.find(filter)
-		.select("name email age status createdAt updatedAt")
 		.sort(sort)
 		.skip(skip)
 		.limit(limit)
@@ -35,6 +34,16 @@ async function getPosts(req, res,  next) {
 	res.json(users);
 }
 
+async function getPostsPerAuthor(req, res,  next) {
+	const result = await Post.aggregate([
+		{ $group:  { _id: "$author",  totalPosts: { $sum: 1 } } },
+		{ $lookup: { from: "users", localField: "_id", foreignField: "_id", as: "author" } },
+		{ $unwind: { path: "$author" } },
+		{$project: {_id: 0, totalPosts: 1,  authorId: "$author._id", authorName: "$author.name",  authorEmail: "$author.email" }}
+	])
+	res.json(result)
+}
+
 module.exports = {
-	create, getPosts
+	create, getPosts,getPostsPerAuthor
 }
