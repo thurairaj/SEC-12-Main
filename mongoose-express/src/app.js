@@ -1,5 +1,6 @@
 const express = require('express');
 const userRoutes = require('./routes/userRoutes');
+const postRoutes = require('./routes/postRoutes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -12,6 +13,7 @@ app.get('/health', (req, res) => {
 
 // routes
 app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
 // middleware for error handling
 app.use(errorHandler)
