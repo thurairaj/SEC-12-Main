@@ -3,6 +3,7 @@ const { config } = require('../config/env');
 
 function requireAuth(req, res, next) {
 	if (config.authStrategy === 'session') {
+		console.log(req.session)
 		if(!req.session?.userId) {
 			return res.status(401).send({message: "Mot authenticated"})
 		}

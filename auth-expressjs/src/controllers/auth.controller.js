@@ -47,8 +47,9 @@ async function login(req, res) {
 	}
 
 	if (config.authStrategy === 'session') {
-		// session = { userId: '' }
+		// session = { userId: 'something' }
 		req.session.userId = String(user._id);
+		req.session.date = (new Date()).toISOString();
 		return res.json({
 			message: "You are logged in",
 			user: {id: user._id, name: user.name, email: user.email},
