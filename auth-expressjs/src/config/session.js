@@ -1,6 +1,6 @@
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const { config } = require('env');
+const { config } = require('./env');
 
 function sessionMiddleware() {
 	return session({
@@ -14,7 +14,7 @@ function sessionMiddleware() {
 			maxAge: 7*24*60*60*1000,
 		},
 		store: MongoStore.create({
-			mongoUri: config.mongoUri,
+			mongoUrl: config.mongoUri,
 			collection: 'sessions',
 			ttl: 7*24*60*60
 		})
