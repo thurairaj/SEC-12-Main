@@ -13,6 +13,9 @@ const config = {
 	session : {
 		secret: required("SESSION_SECRET"),
 	},
-	jwt: {},
+	jwt: {
+		secret: required("JWT_SECRET"),
+		expiresIn: required("JWT_EXPIRES_IN"),
+	},
 }
 module.exports = {config};

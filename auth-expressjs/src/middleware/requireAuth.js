@@ -9,8 +9,21 @@ function requireAuth(req, res, next) {
 		}
 
 		req.auth = { userId: req.session.userId, strategy: "session"};
-		return next();
+	} else if (config.authStrategy === 'jwt'){
+		// Authorization: Bearer header.payload.signature  (token)
+		const auth = req.headers.authorization
+		const token = auth?.slice("Bearer ".length)
+		if (!token) {
+			return res.status(401).send({message: "Mot authenticated"})
+		}
+
+		try {
+			const payload = jwt.verify(token, config.jwt.secret);
+			req.auth = { userId: payload.userId, strategy: "jwt" };
+		} catch (err) {}
 	}
+
+	return next();
 
 }
 

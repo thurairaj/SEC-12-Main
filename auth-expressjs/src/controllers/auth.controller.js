@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User')
 const {config} = require('../config/env');
 const {registerSchema, loginSchema } = require("../validators/auth.validation");
+const {baseCookieOptions} = require("../config/cookies");
+const jwt = require("jsonwebtoken");
 
 
 async function register(req, res) {
@@ -50,13 +52,16 @@ async function login(req, res) {
 		// session = { userId: 'something' }
 		req.session.userId = String(user._id);
 		req.session.date = (new Date()).toISOString();
-		return res.json({
-			message: "You are logged in",
-			user: {id: user._id, name: user.name, email: user.email},
-		})
 	} else {
 		// jwt
+		const token = jwt.sign({userId: user._id}, config.jwt.secret, {expiresIn: config.jwt.expiresIn});
+		res.cookie("access_token", token, { ...baseCookieOptions() });
 	}
+
+	return res.json({
+		message: "You are logged in",
+		user: {id: user._id, name: user.name, email: user.email},
+	})
 
 }
 
@@ -67,6 +72,10 @@ function logout(req, res) {
 			return res.json({success: "Logged out"});
 		})
 	}
+
+	/**
+	 * header.payload.sign = sign(header, payload, secret )
+	 */
 }
 
 async function me(req, res) {
