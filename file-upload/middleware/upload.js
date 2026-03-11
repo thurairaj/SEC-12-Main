@@ -2,7 +2,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const uploadDirectory = path.join(__dirname, 'uploads');
+const uploadDirectory = path.join(__dirname, '..', 'uploads');
 
 if (!fs.existsSync(uploadDirectory)) {
 	fs.mkdirSync(uploadDirectory, { recursive: true });
@@ -15,14 +15,14 @@ const storage = multer.diskStorage({
 
 	filename: function (req, file, cb) {
 		const uniqueName = `${Date.now()}-${file.originalname}`
-		cb(null, uniqueName);
+		cb(null, file.originalname);
 	}
 })
 
 const fileFilter = (req, file, cb) => {
 	const allowedMimeTypes = ['image/png', 'image/jpeg'];
 
-	if (!allowedMimeTypes.includes(file.mimeType)) {
+	if (!allowedMimeTypes.includes(file.mimetype)) {
 		cb(new Error('Invalid file type'));
 	}
 
