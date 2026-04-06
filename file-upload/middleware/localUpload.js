@@ -29,7 +29,7 @@ const fileFilter = (req, file, cb) => {
 	cb(null, true);
 }
 
-const upload = multer({
+const localUpload = multer({
 	storage: storage,
 	fileFilter: fileFilter,
 	limit: {
@@ -37,4 +37,4 @@ const upload = multer({
 	}
 })
 
-module.exports = upload;
+module.exports = localUpload;

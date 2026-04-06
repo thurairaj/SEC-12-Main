@@ -1,3 +1,4 @@
+import './Layout.css'
 import Header from "./Header.jsx";
 import {NavLink, Outlet} from "react-router-dom";
 
@@ -7,8 +8,12 @@ function Layout( ) {
 			<div className={"app-container"}>
 				<Header></Header>
 				<nav className="top-nav panel">
-					<NavLink to={"/"}>Dashboard</NavLink>
-					<NavLink to={"/analytics"}>Analytics</NavLink>
+					<NavLink to={"/"}
+					         className={({isActive}) => isActive ? 'nav-link nav-link-active' : 'nav-link'}
+					         end>Dashboard</NavLink>
+					<NavLink to={"/analytics"}
+					         className={({isActive}) => isActive ? 'nav-link nav-link-active' : 'nav-link'}
+					>Analytics</NavLink>
 				</nav>
 
 				<Outlet></Outlet>

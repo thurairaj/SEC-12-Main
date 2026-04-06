@@ -1,4 +1,8 @@
 import {useEffect, useState} from "react";
+/*
+	state =>
+ */
+
 
 export function useLocalStorage(key, initialValue) {
 	const [value, setValue] = useState(() => {
