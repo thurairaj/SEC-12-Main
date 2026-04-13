@@ -1,7 +1,9 @@
 require('dotenv').config(); // must be first — loads .env into process.env
 
-const express = require('express');
-const cors    = require('cors');
+const express   = require('express');
+const cors      = require('cors');
+const sequelize = require('./db/sequelize');
+require('./models/Todo'); // register model with sequelize before sync
 
 const app  = express();
 const PORT         = process.env.PORT        || 3000;
@@ -11,15 +13,7 @@ const CORS_ORIGINS = (process.env.CORS_ORIGIN || 'http://localhost:5173')
 
 // Allow any origin that appears in the CORS_ORIGIN list.
 // If the request origin isn't in the list, cors() blocks it with a 403.
-app.use(cors({
-  origin: (requestOrigin, callback) => {
-    if (!requestOrigin || CORS_ORIGINS.includes(requestOrigin)) {
-      callback(null, true);
-    } else {
-      callback(new Error(`CORS: origin '${requestOrigin}' is not allowed`));
-    }
-  },
-}));
+app.use(cors({ origin: CORS_ORIGINS }));
 
 // Middleware: parse incoming JSON request bodies
 app.use(express.json());
@@ -43,8 +37,11 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: 'Something went wrong' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+// sync({ force: false }) creates tables that don't exist yet without dropping existing data.
+sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
 });
 
 module.exports = app;
