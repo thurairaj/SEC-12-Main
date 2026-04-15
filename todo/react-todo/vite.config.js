@@ -13,11 +13,16 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server: {
+      host: '0.0.0.0',   // listen on all interfaces so EC2 traffic can reach it
       port: PORT,
       proxy: {
         '/todos':  API_URL,
         '/health': API_URL,
       },
+    },
+    preview: {
+      host: '0.0.0.0',   // same for `vite preview` (serves the production build)
+      port: PORT,
     },
   }
 })
