@@ -1,5 +1,5 @@
 import TodoForm from '../components/TodoForm';
-import FilterBar from '../components/FilterBar';
+import FilterBar from '../components/Filterbar';
 import TodoStats from '../components/TodoStats';
 import TodoList from '../components/TodoList';
 import './Dashboard.css';
